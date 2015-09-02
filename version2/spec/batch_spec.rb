@@ -7,7 +7,7 @@ describe Batch do
 
   it "has some beans" do
     batch.beans.wont_be_nil
-    batch.beans.first.must_equal "bean_0"
+    batch.beans.first.must_be_kind_of Bean # FIXME Mock and assert on send
   end
 
   it "changes the batch state to soaked" do

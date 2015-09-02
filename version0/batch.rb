@@ -1,5 +1,5 @@
 ##
-# Class representing a batch of bean beans
+# Class representing a batch of beans
 
 class Batch
   attr_accessor :beans, :state

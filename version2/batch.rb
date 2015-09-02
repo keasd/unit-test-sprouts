@@ -1,35 +1,28 @@
-class batch
-  attr_accessor :mungs
+##
+# Class representing a batch of beans
 
-  #- Create a new batch
-  def initialize ( mung_beans )
-    self.mungs = mung_beans
-    soak && store
+class Batch
+  attr_accessor :beans, :state
+
+  # Creates a new batch
+  def initialize
+    self.beans = find_beans
   end
 
-  #- Store in a dark place
-  def store
-     sleep 8.hours
-     # a random number of beans sprout
+  # Changes the state to "soaked"
+  def soak
+    self.state = "soaked"
   end
 
-  #- Soak and drain the batch
-  def rinse
-    soak unless self.soaked
-    drain
-  end
-
-  #- Check how many of the beans have sprouted
-  def count_sprouted
-    self.mungs.count { |m| m.sprouted == true }
+  # Changes the state to "soaked"
+  def drain
+    self.state = "drained"
+    self.beans.map { |b| b.sprout }
   end
 
   private
-    def soak
-      self.soaked = true
-    end
-
-    def drain
-      self.soaked = false
-    end
+  # Return an array of beans (Bean instances)
+  def find_beans
+    Array.new(rand(60..100)) { Bean.new }
+  end
 end
