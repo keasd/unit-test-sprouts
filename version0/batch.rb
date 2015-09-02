@@ -2,11 +2,16 @@
 # Class representing a batch of bean beans
 
 class Batch
-  attr_accessor :beans
+  attr_accessor :beans, :state
 
   # Creates a new batch
   def initialize
     self.beans = find_beans
+  end
+
+  # Changes the state to "soaked"
+  def soak
+    self.state = "soaked"
   end
 
   private
