@@ -1,21 +1,27 @@
 require "minitest/autorun"
+require "./batch"
+require "./bean"
 
-class BatchTest < Minitest::Test
+describe Batch do
+  let(:batch) { Batch.new }
 
-  def test_initialize_with_mungs
-    batch = batch.new
-    assert
+  it "has some beans" do
+    batch.beans.wont_be_nil
+    batch.beans.first.must_be_kind_of Bean
   end
 
-  def test_counts_sprouted_mungs
-    # Precondition
-    mungs = Array.new(100) { Mung.new }
-    mungs[1..10].map { |m| m.sprout }
-    batch = Batch.new( mungs )
+  describe "when soaking the batch" do
+    before do
+      batch.soak
+    end
 
-    # Postcondition
-    assert_equals batch.count_sprouted, 10
+    it "change state to soaked" do
+      expect(batch.state).to_return "soaked"
+    end
+
+    it "change state to drained" do
+      batch.drain
+      expect(batch.state).to_return "drained"
+    end
   end
-
-  # Test for find_mungs? => See Sandi Metz video
 end
